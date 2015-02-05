@@ -2,6 +2,8 @@ baseurl = "http://mcascallares.github.io"
 canonifyurls = true
 languageCode = "en-us"
 theme = "hugo-redlounge"
+[author]
+    name = "Matias Cascallares"
 [params]
     sidebartitle = "home"
     sidebartagline = ".. nothing like"
