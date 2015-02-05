@@ -10,6 +10,6 @@ nopaging = true
 noauthor = true
 +++
 
-- [MongoDB-TV](http://mcascallares.github.io/MongoDB-TV/)
+- [MongoDB-TV](http://mcascallares.github.io/resources/MongoDB-TV/index.html)
 - [What's new in MongoDB 2.6](http://slides.com/mcascallares/mongodb-sa-road-trip-ba)
 - [Hand Luggage (AKA an overview of my trips)](http://hand-luggage.appspot.com/)
