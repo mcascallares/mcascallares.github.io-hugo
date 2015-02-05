@@ -1,0 +1,26 @@
+baseurl = "http://mcascallares.github.io"
+canonifyurls = true
+languageCode = "en-us"
+theme = "hugo-redlounge"
+[params]
+    sidebartitle = "home"
+    sidebartagline = ".. nothing like"
+    gaid =  "UA-52058789-1"
+[[menu.main]]
+    name = "Posts"
+    url = "/post"
+[[menu.main]]
+    name = "Presentations"
+    url = "/presentation"
+[[menu.social]]
+    pre = "<i class='fa fa-delicious'></i>"
+    url = "https://delicious.com/matute81"
+    identifier = "delicious"
+[[menu.social]]
+    pre = "<i class='fa fa-github'></i>"
+    url = "https://github.com/mcascallares"
+    identifier = "github"
+[[menu.social]]
+    pre = "<i class='fa fa-twitter'></i>"
+    url = "https://www.twitter.com/mcascallares"
+    identifier = "twitter"
