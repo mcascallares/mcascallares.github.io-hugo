@@ -28,3 +28,7 @@ theme = "hugo-redlounge"
     pre = "<i class='fa fa-instagram'></i>"
     url = "http://instagram.com/mcascallares"
     identifier = "instagram"
+[[menu.social]]
+    pre = "<i class='fa fa-slideshare'></i>"
+    url = "http://www.slideshare.net/MatiasCascallares"
+    identifier = "slideshare"
