@@ -24,3 +24,7 @@ theme = "hugo-redlounge"
     pre = "<i class='fa fa-twitter'></i>"
     url = "https://www.twitter.com/mcascallares"
     identifier = "twitter"
+[[menu.social]]
+    pre = "<i class='fa fa-instagram'></i>"
+    url = "http://instagram.com/mcascallares"
+    identifier = "instagram"
