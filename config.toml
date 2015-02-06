@@ -2,7 +2,7 @@ baseurl = "http://mcascallares.github.io"
 canonifyurls = true
 languageCode = "en-us"
 theme = "hugo-redlounge"
-title = "mcascallares@github.io"
+title = "home ..nothing like"
 [author]
     name = "Matias Cascallares"
 [params]
