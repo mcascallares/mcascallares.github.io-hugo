@@ -8,6 +8,7 @@ keywords = ["mongodb", "databases", "malaysia", "nosql"]
 categories = ["MongoDB", "databases"]
 totop = true
 socialsharing = true
+authortwitter = "http://twitter.com/mcascallares"
 +++
 
 Last Thursday I went to Kuala Lumpur invited by [Mark Smalley](https://twitter.com/m_smalley) to present at [NoSQL Night](http://nosqlasia.org/blog/nosql-asia-starts-2015-with-a-full-house-in-kl-on-january-29th) event. It was a clear success with more than 150 attendees at the trendy [Mindvalley](http://www.mindvalley.com) offices with good pizzas and awesome tech people.
