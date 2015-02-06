@@ -5,6 +5,7 @@ author = "Matias Cascallares"
 date = "2015-02-05T17:23:07+08:00"
 description = "Last Thursday I went to Kuala Lumpur invited by Mark Smalley to present at NoSQL Night event. It was a clear success with almost 100 attendees at the trendy Mindvalley offices with good pizzas and awesome tech people."
 keywords = ["mongodb", "databases", "malaysia", "nosql"]
+categories = ["MongoDB", "databases"]
 +++
 
 Last Thursday I went to Kuala Lumpur invited by [Mark Smalley](https://twitter.com/m_smalley) to present at [NoSQL Night](http://nosqlasia.org/blog/nosql-asia-starts-2015-with-a-full-house-in-kl-on-january-29th) event. It was a clear success with more than 150 attendees at the trendy [Mindvalley](http://www.mindvalley.com) offices with good pizzas and awesome tech people.
