@@ -5,6 +5,8 @@ author = "Matias Cascallares"
 keywords = ["presentations", "software", "mongodb", "databases"]
 nodate = true
 nopaging = true
+totop = true
+authortwitter = "http://twitter.com/mcascallares"
 +++
 
 - [Hand Luggage (AKA an overview of my trips)](http://hand-luggage.appspot.com/)
