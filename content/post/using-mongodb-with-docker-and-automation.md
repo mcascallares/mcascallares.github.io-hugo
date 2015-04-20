@@ -78,7 +78,7 @@ docker run -d \
 
 ```
 <br>
-Deploying this set of containers I can use the following containers:
+With the above configuration I can use the following containers:
 
 - mongod1.mongodb-automation.dev.docker
 - mongod2.mongodb-automation.dev.docker
