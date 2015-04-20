@@ -1,6 +1,6 @@
 +++
 title = "Using MongoDB with Docker and Automation"
-subtitle = "A mature database community in KL"
+subtitle = "Docking your MongoDB instances"
 author = "Matias Cascallares"
 date = "2015-04-20T14:12:26+08:00"
 categories = ["MongoDB", "Docker"]
