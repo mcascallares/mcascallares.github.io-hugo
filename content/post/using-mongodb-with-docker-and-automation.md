@@ -5,7 +5,6 @@ author = "Matias Cascallares"
 date = "2015-04-20T14:12:26+08:00"
 categories = ["MongoDB", "Docker"]
 description = "Lately I have been playing a lot with Docker. I like the whole idea of containers, how you can easily deploy processes in an isolated environment with low resource overhead. In addition, I think another big win introduced by Docker is the image concept: a hermetically sealed portable file that contains all that you need to run your process or application: binaries, dependencies and configuration. Just beautiful!"
-draft = true
 keywords = ["software", "mongodb", "docker", "databases"]
 totop = true
 socialsharing = true
