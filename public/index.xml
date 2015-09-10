@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>home ..nothing like</title>
+    <link>http://mcascallares.github.io/</link>
+    <description>Recent content on home ..nothing like</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 20 Apr 2015 14:12:26 +0800</lastBuildDate>
+    <atom:link href="http://mcascallares.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Using MongoDB with Docker and Automation</title>
+      <link>http://mcascallares.github.io/post/using-mongodb-with-docker-and-automation/</link>
+      <pubDate>Mon, 20 Apr 2015 14:12:26 +0800</pubDate>
+      
+      <guid>http://mcascallares.github.io/post/using-mongodb-with-docker-and-automation/</guid>
+      <description>&lt;p&gt;Lately I have been playing a lot with Docker. I love the whole idea of containers, how you can easily deploy processes in an &lt;em&gt;isolated&lt;/em&gt; environment with low resource overhead. In addition, I think another big win introduced by Docker is the &lt;a href=&#34;http://docs.docker.com/userguide/dockerimages/&#34;&gt;image concept&lt;/a&gt;: a hermetically sealed portable file that contains all that you need to run your process or application: binaries, dependencies and configuration. Just beautiful!&lt;/p&gt;
+
+&lt;p&gt;Working at MongoDB means I need to run several mongod processes every day: to test a specific feature, to demo something, configuration example, etc. It also means that sometimes I need to deploy multiple nodes with different configurations to simulate a real scenario. I started to use Docker for this and it has been working like a breeze. In a couple of seconds I can start multiple mongod processes with different configurations, different Linux distributions and play around with them. Before starting with Docker I used &lt;a href=&#34;https://www.vagrantup.com&#34;&gt;Vagrant&lt;/a&gt; instances with VirtualBox, but it required more resources and it was slower.&lt;/p&gt;
+
+&lt;p&gt;The triangulation of my MongoDB sandbox environment is completed with &lt;a href=&#34;https://mms.mongodb.com/&#34;&gt;MMS Automation&lt;/a&gt;. For those who don&amp;rsquo;t know MMS, it is a cloud service to manage, monitor and backup your MongoDB instances that can be running anywhere: cloud, on-premise servers or your own laptop in a kind of &lt;em&gt;bring your own infrastructure&lt;/em&gt; principle. One interesting aspect of MMS is that you do not need to worry about installing and managing your MongoDB instances, you just need to specify which machines do you want to deploy to and the desired MongoDB configuration (e.g. I want a 3-nodes replica set).&lt;/p&gt;
+
+&lt;p&gt;When I updated my sandbox environment to Docker I built an &lt;a href=&#34;https://registry.hub.docker.com/u/mcascallares/mongodb-automation/&#34;&gt;image ready to work with MMS Automation&lt;/a&gt; that includes the MMS Automation agent pre-installed. That means that if I want to start a new mongod process I just start one container with this image specifying my MMS GroupId + ApiKey and the container is ready to be provisioned using the MMS web interface.&lt;/p&gt;
+
+&lt;p&gt;If I need to deploy a distributed environment like a MongoDB replica set or sharded cluster I need to take care of the networking among my replica nodes: provide connectivity and host resolution among all of them. You can find &lt;a href=&#34;http://progrium.com/blog/2014/08/20/consul-service-discovery-with-docker/&#34;&gt;really good posts&lt;/a&gt; out there explaining how to achieve service discovery with Docker so I am not going into details on this. What I used for my sandbox is a container running Skydns plus another container running &lt;a href=&#34;https://github.com/crosbymichael/skydock&#34;&gt;Skydock&lt;/a&gt;. This container is listening for other container events, like start and stop, and based on those it will add/remove DNS entries allowing up-to-date hostname resolution across all my containers.&lt;/p&gt;
+
+&lt;p&gt;Putting all together to deploy a 3-nodes replica set using &lt;a href=&#34;http://www.fig.sh&#34;&gt;Docker Compose&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# running a DNS container with Skydns
+docker run -d \
+    -p 172.17.42.1:53:53/udp \
+    --name skydns crosbymichael/skydns \
+    -nameserver 8.8.8.8:53 \
+    -domain docker
+
+
+# running Skydock container to hook docker events with DNS updates
+docker run -d \
+    -v /var/run/docker.sock:/docker.sock \
+    --name skydock crosbymichael/skydock \
+    -ttl 30 \
+    -environment dev \
+    -s /docker.sock \
+    -domain docker \
+    -name skydns
+
+
+# running 3 mongod processes in 3 different containers, one agent per container.
+docker run -d \
+    --name mongod1 \
+    -h mongod1.mongodb-automation.dev.docker \
+    --dns 172.17.42.1 \
+    -p 27017:27000 \
+    mcascallares/mongodb-automation:latest \
+    --mmsBaseUrl=https://mms.mongodb.com \
+    --mmsGroupId=&amp;lt;your_mms_group_id&amp;gt; \
+    --mmsApiKey=&amp;lt;your_mms_api_key&amp;gt;
+
+
+docker run -d \
+    --name mongod2 \
+    -h mongod2.mongodb-automation.dev.docker \
+    --dns 172.17.42.1 \
+    -p 27018:27000 \
+    mcascallares/mongodb-automation:latest \
+    --mmsBaseUrl=https://mms.mongodb.com \
+    --mmsGroupId=&amp;lt;your_group_id&amp;gt; \
+    --mmsApiKey=&amp;lt;your_mms_api_key&amp;gt;
+
+
+docker run -d \
+    --name mongod3 \
+    -h mongod3.mongodb-automation.dev.docker \
+    --dns 172.17.42.1 \
+    -p 27019:27000 \
+    mcascallares/mongodb-automation:latest \
+    --mmsBaseUrl=https://mms.mongodb.com \
+    --mmsGroupId=&amp;lt;your_group_id&amp;gt; \
+    --mmsApiKey=&amp;lt;your_mms_api_key&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br&gt;
+With the above configuration I can use the following containers:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;mongod1.mongodb-automation.dev.docker&lt;/li&gt;
+&lt;li&gt;mongod2.mongodb-automation.dev.docker&lt;/li&gt;
+&lt;li&gt;mongod3.mongodb-automation.dev.docker&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;to deploy my MongoDB replica set using MMS user interface. Check &lt;a href=&#34;https://docs.mms.mongodb.com&#34;&gt;MMS Documentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Find more details and other setup examples at &lt;a href=&#34;https://registry.hub.docker.com/u/mcascallares/mongodb-automation/&#34;&gt;Docker Hub&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>NoSQL night in Malaysia</title>
+      <link>http://mcascallares.github.io/post/nosql-night-in-malaysia/</link>
+      <pubDate>Thu, 05 Feb 2015 17:23:07 +0800</pubDate>
+      
+      <guid>http://mcascallares.github.io/post/nosql-night-in-malaysia/</guid>
+      <description>&lt;p&gt;Last Thursday I went to Kuala Lumpur invited by &lt;a href=&#34;https://twitter.com/m_smalley&#34;&gt;Mark Smalley&lt;/a&gt; to present at &lt;a href=&#34;http://nosqlasia.org/blog/nosql-asia-starts-2015-with-a-full-house-in-kl-on-january-29th&#34;&gt;NoSQL Night&lt;/a&gt; event. It was a clear success with more than 150 attendees at the trendy &lt;a href=&#34;http://www.mindvalley.com&#34;&gt;Mindvalley&lt;/a&gt; offices with good pizzas and awesome tech people.&lt;/p&gt;
+
+&lt;p&gt;There was a common message across the four different sessions: &lt;em&gt;there is no database perfect for all the possible scenarios&lt;/em&gt;. If you expect to have a single technology to solve all your problems then you are probably starting with the wrong foot. You need to analyze your use case and discover when does make sense to use a key-value store, a document or a relational database. It was a glad surprise to see that this concept was already understood in the audience, which demonstrates how mature is the community in Kuala Lumpur.&lt;/p&gt;
+
+&lt;p&gt;My presentation was focused on MongoDB, quick introduction and things to do and to avoid when you design your schema in MongoDB. We also explored some common use cases and how to solve them using MongoDB.&lt;/p&gt;
+
+&lt;p&gt;As a side note, it was my first time at the new &lt;a href=&#34;http://www.klia2.info&#34;&gt;KLIA2 terminal&lt;/a&gt; in KL, kudos for a Malaysia for the seamless and well designed new terminal.&lt;/p&gt;
+
+&lt;div class=&#34;embed-slideshare&#34;&gt;
+&lt;iframe src=&#34;http://www.slideshare.net/MatiasCascallares/slideshelf&#34; width=&#34;490px&#34; height=&#34;470px&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:none;&#34; allowfullscreen webkitallowfullscreen mozallowfullscreen&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Presentations</title>
+      <link>http://mcascallares.github.io/presentation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://mcascallares.github.io/presentation/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://hand-luggage.appspot.com/&#34;&gt;Hand Luggage (AKA an overview of my trips)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://slides.com/mcascallares/mongodb-sa-road-trip-ba&#34;&gt;What&amp;rsquo;s new in MongoDB 2.6&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.slideshare.net/MatiasCascallares/the-what-and-why-of-nosql&#34;&gt;The What and Why of NoSql&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.slideshare.net/MatiasCascallares/the-fine-art-of-schema-design-in-mongodb-dos-and-donts&#34;&gt;The Fine Art of Schema Design in MongoDB: Dos and Don&amp;rsquo;ts&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.slideshare.net/MatiasCascallares/schema-design-real-world-use-case&#34;&gt;Schema Design - Real world use case&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.slideshare.net/MatiasCascallares/02-mms-monitoring-backup-and-management-at-a-single-click&#34;&gt;MMS - Monitoring, backup and management at a single click&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://mcascallares.github.io/resources/MongoDB-TV/index.html&#34;&gt;MongoDB-TV&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

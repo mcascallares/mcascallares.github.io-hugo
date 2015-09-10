@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Databases on home ..nothing like</title>
+    <link>http://mcascallares.github.io/categories/databases/</link>
+    <description>Recent content in Databases on home ..nothing like</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 05 Feb 2015 17:23:07 +0800</lastBuildDate>
+    <atom:link href="http://mcascallares.github.io/categories/databases/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>NoSQL night in Malaysia</title>
+      <link>http://mcascallares.github.io/post/nosql-night-in-malaysia/</link>
+      <pubDate>Thu, 05 Feb 2015 17:23:07 +0800</pubDate>
+      
+      <guid>http://mcascallares.github.io/post/nosql-night-in-malaysia/</guid>
+      <description>&lt;p&gt;Last Thursday I went to Kuala Lumpur invited by &lt;a href=&#34;https://twitter.com/m_smalley&#34;&gt;Mark Smalley&lt;/a&gt; to present at &lt;a href=&#34;http://nosqlasia.org/blog/nosql-asia-starts-2015-with-a-full-house-in-kl-on-january-29th&#34;&gt;NoSQL Night&lt;/a&gt; event. It was a clear success with more than 150 attendees at the trendy &lt;a href=&#34;http://www.mindvalley.com&#34;&gt;Mindvalley&lt;/a&gt; offices with good pizzas and awesome tech people.&lt;/p&gt;
+
+&lt;p&gt;There was a common message across the four different sessions: &lt;em&gt;there is no database perfect for all the possible scenarios&lt;/em&gt;. If you expect to have a single technology to solve all your problems then you are probably starting with the wrong foot. You need to analyze your use case and discover when does make sense to use a key-value store, a document or a relational database. It was a glad surprise to see that this concept was already understood in the audience, which demonstrates how mature is the community in Kuala Lumpur.&lt;/p&gt;
+
+&lt;p&gt;My presentation was focused on MongoDB, quick introduction and things to do and to avoid when you design your schema in MongoDB. We also explored some common use cases and how to solve them using MongoDB.&lt;/p&gt;
+
+&lt;p&gt;As a side note, it was my first time at the new &lt;a href=&#34;http://www.klia2.info&#34;&gt;KLIA2 terminal&lt;/a&gt; in KL, kudos for a Malaysia for the seamless and well designed new terminal.&lt;/p&gt;
+
+&lt;div class=&#34;embed-slideshare&#34;&gt;
+&lt;iframe src=&#34;http://www.slideshare.net/MatiasCascallares/slideshelf&#34; width=&#34;490px&#34; height=&#34;470px&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;border:none;&#34; allowfullscreen webkitallowfullscreen mozallowfullscreen&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
