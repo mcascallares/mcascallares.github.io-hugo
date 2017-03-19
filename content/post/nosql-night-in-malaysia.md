@@ -1,5 +1,5 @@
 +++
-title = "NoSQL night in Malaysia"
+title = "NoSQL Night in Malaysia"
 subtitle = "A mature database community in KL"
 author = "Matias Cascallares"
 date = "2015-02-05T17:23:07+08:00"
