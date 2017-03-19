@@ -1,6 +1,6 @@
 +++
-date = "2017-03-19T17:49:51+08:00"
-description = ""
+date = "2017-02-19T17:49:51+08:00"
+description = "In December 2016 we had an Elastic booth at Strata Hadoop Singapore. It was a 2-days event with great discussions with users and customers. Check the video for more impressions around this event."
 keywords = ["software", "elasticsearch", "elastic", "asia", "strata", "hadoop"]
 draft = false
 authortwitter = "http://twitter.com/mcascallares"
