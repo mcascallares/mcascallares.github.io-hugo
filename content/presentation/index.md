@@ -17,3 +17,4 @@ authortwitter = "http://twitter.com/mcascallares"
 - [MMS - Monitoring, backup and management at a single click](http://www.slideshare.net/MatiasCascallares/02-mms-monitoring-backup-and-management-at-a-single-click)
 - [MongoDB-TV](http://mcascallares.github.io/resources/MongoDB-TV/index.html)
 - [Elasticsearch 5.0](https://www.slideshare.net/MatiasCascallares/elasticsearch-50)
+- [Elastic{ON} 2017 Recap](https://www.slideshare.net/MatiasCascallares/elasticon-2017-recap)
