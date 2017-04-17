@@ -14,7 +14,7 @@ title = "home ..nothing like"
     url = "/post"
 [[menu.main]]
     name = "Presentations"
-    url = "/presentation"
+    url = "/presentation/index"
 [[menu.social]]
     pre = "<i class='fa fa-delicious'></i>"
     url = "https://delicious.com/matute81"
