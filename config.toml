@@ -16,10 +16,6 @@ title = "home ..nothing like"
     name = "Presentations"
     url = "/presentation/index/"
 [[menu.social]]
-    pre = "<i class='fa fa-delicious'></i>"
-    url = "https://delicious.com/matute81"
-    identifier = "delicious"
-[[menu.social]]
     pre = "<i class='fa fa-github'></i>"
     url = "https://github.com/mcascallares"
     identifier = "github"
@@ -35,3 +31,4 @@ title = "home ..nothing like"
     pre = "<i class='fa fa-slideshare'></i>"
     url = "http://www.slideshare.net/MatiasCascallares"
     identifier = "slideshare"
+    
